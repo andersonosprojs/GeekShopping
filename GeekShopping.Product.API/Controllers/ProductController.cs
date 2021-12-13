@@ -17,16 +17,16 @@ namespace GeekShopping.Product.API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductVO>>> FindAll()
+        public async Task<ActionResult<IEnumerable<ProductVO>>> FindAllAsync()
         {
-            var products = await _repository.FindAll();
+            var products = await _repository.FindAllAsync();
             return Ok(products);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductVO>> FindById(long id)
+        public async Task<ActionResult<ProductVO>> FindByIdAsync(long id)
         {
-            var product = await _repository.FindById(id);
+            var product = await _repository.FindByIdAsync(id);
 
             if (product == null)
                 return NotFound();
@@ -35,31 +35,31 @@ namespace GeekShopping.Product.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductVO>> Create(ProductVO productVO)
+        public async Task<ActionResult<ProductVO>> CreateAsync(ProductVO productVO)
         {
             if (productVO == null)
                 return BadRequest();
 
-            var product = await _repository.Create(productVO);
+            var product = await _repository.CreateAsync(productVO);
 
             return Ok(product);
         }
 
         [HttpPut]
-        public async Task<ActionResult<ProductVO>> Update(ProductVO productVO)
+        public async Task<ActionResult<ProductVO>> UpdateAsync(ProductVO productVO)
         {
             if (productVO == null)
                 return BadRequest();
 
-            var product = await _repository.Update(productVO);
+            var product = await _repository.UpdateAsync(productVO);
 
             return Ok(product);
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(long id)
+        public async Task<ActionResult> DeleteAsync(long id)
         {
-            var status = await _repository.Delete(id);
+            var status = await _repository.DeleteAsync(id);
 
             if (!status)
                 return BadRequest();

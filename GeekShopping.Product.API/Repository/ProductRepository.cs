@@ -16,19 +16,19 @@ namespace GeekShopping.Product.API.Repository
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ProductVO>> FindAll()
+        public async Task<IEnumerable<ProductVO>> FindAllAsync()
         {
             var products = await _context.Products.ToListAsync();
             return _mapper.Map<List<ProductVO>>(products);
         }
 
-        public async Task<ProductVO> FindById(long id)
+        public async Task<ProductVO> FindByIdAsync(long id)
         {
             var product = await _context.Products.Where(p => p.Id == id).FirstOrDefaultAsync();
             return _mapper.Map<ProductVO>(product);
         }
 
-        public async Task<ProductVO> Create(ProductVO productVO)
+        public async Task<ProductVO> CreateAsync(ProductVO productVO)
         {
             var product = _mapper.Map<Model.Product>(productVO);
             _context.Products.Add(product);
@@ -37,7 +37,7 @@ namespace GeekShopping.Product.API.Repository
             return _mapper.Map<ProductVO>(product);
         }
 
-        public async Task<ProductVO> Update(ProductVO productVO)
+        public async Task<ProductVO> UpdateAsync(ProductVO productVO)
         {
             var product = _mapper.Map<Model.Product>(productVO);
             _context.Products.Update(product);
@@ -46,7 +46,7 @@ namespace GeekShopping.Product.API.Repository
             return _mapper.Map<ProductVO>(product);
         }
 
-        public async Task<bool> Delete(long id)
+        public async Task<bool> DeleteAsync(long id)
         {
             try
             {
